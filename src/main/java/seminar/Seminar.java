@@ -4,36 +4,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Seminar {
-	private String _location;
-	private int _seatsLeft;
+	private Course _course;
+	private Location _location;
+	private List<Student> _students;
 
-	private Course course;
-	private Enrollment[] enrollments;
 
-	public String getDescritpion() {
-		return course.getDescription();
+	public Seminar(Location location, List<Student> students) {
+		_students = students;
+		_location = location;
 	}
 
-	public String getLocation() {
-    	return _location;
-    }
-
-	public int getSeatsLeft() {
-		return _seatsLeft;
+	public String getDescritpion() {
+		return _course.getDescription();
 	}
 
 	public SeminarName getName() {
-		String name = course.getName();
-		int number = course.getNumber();
+		String name = _course.getName();
+		int number = _course.getNumber();
 
 		return new SeminarName(name, number);
 	}
 
+	public String getLocation() {
+    	return _location.getName();
+    }
+
+	public int getSeatsLeft() {
+		return _location.getSeats() - _students.size();
+	}
+
 	public List<String> getStudentsList() {
-		List<String> list = new ArrayList<String>();
-		for(Enrollment e: enrollments) {
-			list.add(e.getInfo());
+		List<String> students = new ArrayList<>();
+		for(Student student: _students) {
+			students.add(student.getFullName());
 		}
 
-		return list;
+		return students;
 	}}
