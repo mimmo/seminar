@@ -2,16 +2,20 @@ package seminar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Seminar {
 	private Course _course;
 	private Location _location;
-	private List<Student> _students;
+	private List<Student> _students = new ArrayList<>();
 
-
-	public Seminar(Location location, List<Student> students) {
-		_students = students;
+	public Seminar(Location location, Course course) {
+		_course = course;
 		_location = location;
+	}
+
+	public boolean addStudent(Student student) {
+		return (getSeatsLeft() > 0) ? _students.add(student) : false;
 	}
 
 	public String getDescritpion() {
@@ -26,18 +30,14 @@ public class Seminar {
 	}
 
 	public String getLocation() {
-    	return _location.getName();
-    }
+		return _location.getName();
+	}
 
 	public int getSeatsLeft() {
 		return _location.getSeats() - _students.size();
 	}
 
 	public List<String> getStudentsList() {
-		List<String> students = new ArrayList<>();
-		for(Student student: _students) {
-			students.add(student.getFullName());
-		}
-
-		return students;
-	}}
+		return _students.stream().map(s -> s.getFullName()).collect(Collectors.toList());
+	}
+}

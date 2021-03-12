@@ -10,4 +10,9 @@ public class SeminarName {
 		_name = name;
 		_number = number;
 	}
+
+	@Override
+	public String toString() {
+		return _name + "#" + _number;
+	}
 }
