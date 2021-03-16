@@ -37,7 +37,7 @@ public class SeminarDetails {
 		html += ":</div><ul><li>";
 		html += _seminar.getDescritpion();
 		html += "</li><li>";
-		html += _seminar.getLocation();
+		html += _seminar.getLocation().getName();
 		html += "</li><li>";
 		html += String.valueOf(_seminar.getSeatsLeft());
 		html += "</li></ul><div>partecipanti:</div><ul>";
