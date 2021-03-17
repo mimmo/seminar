@@ -56,14 +56,17 @@ public class Seminar {
 
 	}
 
+	public Course getCourse() {
+		return _course;
+	}
 
 	public String getDescritpion() {
-		return _course.getDescription();
+		return getCourse().getDescription();
 	}
 
 	public SeminarName getName() {
-		String name = _course.getName();
-		int number = _course.getNumber();
+		String name = getCourse().getName();
+		int number = getCourse().getNumber();
 
 		return new SeminarName(name, number);
 	}
