@@ -3,10 +3,14 @@ package seminar.queue.interfacing;
 public class MonitorableQueue implements Queue {
 	private int _highWaterMark = 0;
 	private int _currentSize;
-	private SimpleQueue _queue;
+	private Queue _queue;
 
 	public MonitorableQueue(int size) {
-		_queue = new SimpleQueue(size);
+		this(new SimpleQueue(size));
+	}
+
+	public MonitorableQueue(Queue queue) {
+		_queue = queue;
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class MonitorableQueue implements Queue {
 		return _queue.size();
 	}
 
-	public Object getMaxiumumSize() {
+	public int getMaxiumumSize() {
 		return _highWaterMark;
 	}
 
