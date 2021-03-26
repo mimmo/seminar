@@ -17,6 +17,34 @@ public class SeminarDetailsHTMLTest {
 	}
 
 	@Test
+	public void HTMLcourseHeader() {
+		Seminar _seminar = _seminarBuilder.build();
+		SeminarDetailsHTML html = new SeminarDetailsHTML(_seminar);
+		assertThat(html.header()).isEqualTo("<html><head><title>Requirements Analysis#1</title></head><body><div>Requirements Analysis#1</div>");
+	}
+
+	@Test
+	public void HTMLcourseInfo() {
+		Seminar _seminar = _seminarBuilder.build();
+		SeminarDetailsHTML html = new SeminarDetailsHTML(_seminar);
+		assertThat(html.courseInfo()).isEqualTo("<ul><li>Identify and write scenarios</li><li>The main room</li><li>3</li></ul><div>partecipanti:</div><ul>");
+	}
+
+	@Test
+	public void HTMLstudentLine() {
+		Seminar _seminar = _seminarBuilder.build();
+		SeminarDetailsHTML html = new SeminarDetailsHTML(_seminar);
+		assertThat(html.studentLine(StudentFactory.marioRossi().getFullName())).isEqualTo("<li>Mario Rossi</li>");
+	}
+
+	@Test
+	public void HTMLfooter() {
+		Seminar _seminar = _seminarBuilder.build();
+		SeminarDetailsHTML html = new SeminarDetailsHTML(_seminar);
+		assertThat(html.footer()).isEqualTo("</ul></body></html><hr>");
+	}
+
+	@Test
 	public void HTMLcourseWithoutStudents() {
 		Seminar _seminar = _seminarBuilder.build();
 		doc = Jsoup.parse(new SeminarDetailsHTML(_seminar).render());

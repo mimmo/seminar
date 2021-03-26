@@ -1,32 +1,33 @@
 package seminar;
 
-public class SeminarDetailsHTML implements SeminarDetails {
-	 private Seminar _seminar;
-
-	 public SeminarDetailsHTML(Seminar seminar) {
-	 _seminar = seminar;
+public class SeminarDetailsHTML extends SeminarDetails {
+	public SeminarDetailsHTML(Seminar seminar) {
+		 super(seminar);
 	 }
 
 	@Override
-	public String render() {
-		String html = "<html><head><title>";
-		html += _seminar.getName();
-		html += "</title><body><div>";
-		html += _seminar.getName();
-		html += ":</div><ul><li>";
-		html += _seminar.getDescritpion();
-		html += "</li><li>";
-		html += _seminar.getLocation().getName();
-		html += "</li><li>";
-		html += String.valueOf(_seminar.getSeatsLeft());
-		html += "</li></ul><div>partecipanti:</div><ul>";
-		for (String s : _seminar.getStudentsList()) {
-			html += "<li>" + s + "</li>";
-		}
-		html += "</ul>";
-		html += "</body></html>";
+	public String header() {
+		return "<html><head><title>" +
+			_seminar.getName() + "</title></head><body><div>" +
+			_seminar.getName() + "</div>";
+	}
 
-		return html;
+	@Override
+	public String courseInfo() {
+		return "<ul><li>"  +
+			_seminar.getDescritpion() + "</li><li>" +
+			_seminar.getLocation().getName() + "</li><li>" +
+			String.valueOf(_seminar.getSeatsLeft()) + "</li></ul><div>partecipanti:</div><ul>";
+	}
+
+	@Override
+	public String studentLine(String s) {
+		return "<li>" + s + "</li>";
+	}
+
+	@Override
+	public String footer() {
+		return "</ul></body></html><hr>";
 	}
 
 }

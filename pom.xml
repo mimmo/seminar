@@ -6,19 +6,76 @@
 	<artifactId>seminar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>seminar</name>
+	<packaging>war</packaging>
+
+	<properties>
+		<maven.compiler.release>12</maven.compiler.release>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<!-- use 2.9.1 for Java 7 projects -->
 			<version>3.19.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<!-- jsoup HTML parser library @ https://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.13.1</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.gmtech</groupId>
+			<artifactId>mfg-dependencies</artifactId>
+			<version>4.3-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>exec-maven-plugin</artifactId>
+										<versionRange>[1.4.0,)</versionRange>
+										<goals>
+											<goal>exec</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+					<configuration>
+						<encoding>ISO-8859-1</encoding>
+						<fork>true</fork>
+						<executable>${env.JAVA12}/bin/javac</executable>
+						<release>12</release>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
