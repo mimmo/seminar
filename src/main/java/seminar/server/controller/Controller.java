@@ -1,6 +1,6 @@
 package seminar.server.controller;
 
-import seminar.server.servlet.Context;
+import seminar.context.Context;
 
 public interface Controller {
 

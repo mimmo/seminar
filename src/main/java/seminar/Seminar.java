@@ -1,14 +1,13 @@
 package seminar;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Seminar {
 	private Course _course;
 	private Location _location;
-	private Set<Student> _students;
+	private LinkedHashSet<Student> _students;
 
 	public static Seminar.Builder builder() {
 		return new Builder();
@@ -17,7 +16,7 @@ public class Seminar {
 	public static class Builder {
 		private Course course;
 		private Location location;
-		private Set<Student> students;
+		private LinkedHashSet<Student> students;
 
 		public Seminar build() {
 			Seminar result = new Seminar();
@@ -41,17 +40,17 @@ public class Seminar {
 			this.students.add(student);
 			return this;
 		}
-		public Builder students(Set<Student> students) {
+		public Builder students(LinkedHashSet<Student> students) {
 			this.students = students
 				.stream()
-				.collect(Collectors.toSet());
+				.collect(Collectors.toCollection( LinkedHashSet::new ));
 			return this;
 		}
 
 		private Builder() {
 			course = new Course("", 0, "");
 			location = new Location("", 0);
-			students = new HashSet<>();
+			students = new LinkedHashSet<>();
 		}
 
 	}

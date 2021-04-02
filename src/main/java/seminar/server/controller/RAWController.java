@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seminar.Seminar;
-import seminar.SeminarDetailsRAW;
-import seminar.server.servlet.Context;
-import seminar.server.servlet.Response;
+import seminar.context.Context;
+import seminar.context.Response;
+import seminar.transformers.SeminarRAWTransformer;
 
 public class RAWController implements Controller{
 	private List<Seminar> _seminars;
@@ -24,7 +24,7 @@ public class RAWController implements Controller{
 	public void execute(Context context) throws Exception {
 		String payload = _seminars
 			.stream()
-			.map(s -> new SeminarDetailsRAW(s).render())
+			.map(s -> new SeminarRAWTransformer().apply(s))
 			.collect(Collectors.joining(""));
 
 		context.add(Response

@@ -1,5 +1,6 @@
 package seminar.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import _ch.gmtech.xremote.http.server.HttpServer;
@@ -31,6 +32,7 @@ public class SeminarHttpServer {
 			.student(new Student("Roberto", "Azzurri"))
 			.build()
 		));
+		builder.addContextAttribute("persistence", new ArrayList<Course>());
 
 		builder.addServletMapping(new Servlet(), "/", "/*");
 		HttpServer server = builder.make();

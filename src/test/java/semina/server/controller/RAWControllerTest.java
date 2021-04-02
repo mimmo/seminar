@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import seminar.Seminar;
 import seminar.SeminarBuilderFactory;
-import seminar.SeminarDetailsRAW;
+import seminar.context.Context;
 import seminar.server.controller.Controller;
 import seminar.server.controller.RAWController;
-import seminar.server.servlet.Context;
+import seminar.transformers.SeminarRAWTransformer;
 
 public class RAWControllerTest {
 
@@ -28,6 +28,6 @@ public class RAWControllerTest {
 		rawController.execute(context);
 		assertThat(context.getResponse().getContentType()).isEqualTo("text/plain");
 		assertThat(context.getResponse().getCharset()).isEqualTo("UTF-8");
-		assertThat(context.getResponse().getPayload()).isEqualTo(new SeminarDetailsRAW(seminar).render());
+		assertThat(context.getResponse().getPayload()).isEqualTo(new SeminarRAWTransformer().apply(seminar));
 	}
 }

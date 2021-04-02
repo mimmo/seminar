@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import seminar.Seminar;
 import seminar.SeminarBuilderFactory;
-import seminar.SeminarDetailsHTML;
+import seminar.context.Context;
 import seminar.server.controller.Controller;
 import seminar.server.controller.HTMLController;
-import seminar.server.servlet.Context;
+import seminar.transformers.SeminarHTMLTransformer;
 
 public class HTMLControllerTest {
 	@Test
@@ -27,6 +27,6 @@ public class HTMLControllerTest {
 		htmlController.execute(context);
 		assertThat(context.getResponse().getContentType()).isEqualTo("text/html");
 		assertThat(context.getResponse().getCharset()).isEqualTo("UTF-8");
-		assertThat(context.getResponse().getPayload()).isEqualTo(new SeminarDetailsHTML(seminar).render());
+		assertThat(context.getResponse().getPayload()).isEqualTo(new SeminarHTMLTransformer().apply(seminar));
 	}
 }

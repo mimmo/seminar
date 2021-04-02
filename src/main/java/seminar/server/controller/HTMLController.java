@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seminar.Seminar;
-import seminar.SeminarDetailsHTML;
-import seminar.server.servlet.Context;
-import seminar.server.servlet.Response;
+import seminar.context.Context;
+import seminar.context.Response;
+import seminar.transformers.SeminarHTMLTransformer;
 
 public class HTMLController implements Controller{
 	private List<Seminar> _seminars;
@@ -22,10 +22,9 @@ public class HTMLController implements Controller{
 
 	@Override
 	public void execute(Context context) throws Exception {
-//		context.getRequest().getParameters()
 		String payload = _seminars
 			.stream()
-			.map(s -> new SeminarDetailsHTML(s).render())
+			.map(s -> new SeminarHTMLTransformer().apply(s))
 			.collect(Collectors.joining(""));
 
 		context.add(Response

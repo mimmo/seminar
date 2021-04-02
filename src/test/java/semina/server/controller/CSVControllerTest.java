@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import seminar.Seminar;
 import seminar.SeminarBuilderFactory;
-import seminar.SeminarDetailsCSV;
+import seminar.context.Context;
 import seminar.server.controller.CSVController;
 import seminar.server.controller.Controller;
-import seminar.server.servlet.Context;
+import seminar.transformers.SeminarCSVTransformer;
 
 public class CSVControllerTest {
 	@Test
@@ -28,6 +28,6 @@ public class CSVControllerTest {
 		assertThat(context.getResponse().getContentType()).isEqualTo("text/csv");
 		assertThat(context.getResponse().getHeaders().get("Content-Disposition")).isEqualTo("attachment; fileName=data.csv");
 		assertThat(context.getResponse().getCharset()).isEqualTo("UTF-8");
-		assertThat(context.getResponse().getPayload()).isEqualTo(new SeminarDetailsCSV(seminar).render());
+		assertThat(context.getResponse().getPayload()).isEqualTo(new SeminarCSVTransformer().apply(seminar));
 	}
 }

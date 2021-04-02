@@ -1,4 +1,4 @@
-package seminar.server.servlet;
+package seminar.context;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ public class Response {
 	private Map<String, String> headers = new HashMap<>();
 	private String charset;
 	private String payload;
+	private String redirect;
 
 	public static Response.Builder builder() {
 		return new Builder();
@@ -19,6 +20,7 @@ public class Response {
 		private Map<String, String> headers;
 		private String charset;
 		private String payload;
+		private String redirect;
 
 		public Response build() {
 			Response result = new Response();
@@ -26,6 +28,7 @@ public class Response {
 			result.headers = headers;
 			result.charset = charset;
 			result.payload = payload;
+			result.redirect = redirect;
 			return result;
 		}
 
@@ -47,13 +50,19 @@ public class Response {
 			this.payload = payload;
 			return this;
 		}
+		public Builder redirect(String path) {
+			this.redirect = path;
+			return this;
+		}
 
 		private Builder() {
 			headers = new HashMap<>();
 			charset("UTF-8");
 			contentType("text/plain");
 			payload("");
+			redirect("");
 		}
+
 
 	}
 
@@ -73,7 +82,11 @@ public class Response {
 	public String getPayload() {
 		return payload;
 	}
+	public String getRedirectURL() {
+		return redirect;
+	}
 
 	private Response() {}
+
 
 }
