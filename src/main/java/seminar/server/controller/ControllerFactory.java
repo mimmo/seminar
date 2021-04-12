@@ -1,25 +1,23 @@
 package seminar.server.controller;
 
+import java.sql.Connection;
 import java.util.List;
 
-import seminar.Course;
-import seminar.Seminar;
+import seminar.importer.Importer;
+import seminar.server.repository.SeminarRepository;
 
 public class ControllerFactory {
-	private List<Course> _coursePersistence;
-	private List<Seminar> _seminars;
+	private Connection _connection;
 
-	public ControllerFactory(List<Course> coursePersistence, List<Seminar> seminars) {
-		_coursePersistence = coursePersistence;
-		_seminars = seminars;
+	public ControllerFactory(Connection connection) {
+		_connection = connection;
 	}
 
 	public List<Controller> create() {
 		return List.of(
-			new HTMLController(_seminars),
-			new CSVController(_seminars),
-			new RAWController(_seminars),
-			new CourseCreateController(_coursePersistence)
+			new CreateController(new SeminarRepository(_connection)),
+			new ImportController(() -> Importer.load("src/main/resources/seminars.csv"), new SeminarRepository(_connection)),
+			new ListController(new SeminarRepository(_connection))
 		);
 	}
 }

@@ -1,4 +1,4 @@
-package semina.server.controller;
+package seminar.server.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,8 +9,6 @@ import org.junit.Test;
 import seminar.Seminar;
 import seminar.SeminarBuilderFactory;
 import seminar.context.Context;
-import seminar.server.controller.Controller;
-import seminar.server.controller.RAWController;
 import seminar.transformers.SeminarRAWTransformer;
 
 public class RAWControllerTest {

@@ -108,7 +108,6 @@ public class HttpResponseWriterTest {
 
 		@Override
 		public Collection<String> getHeaderNames() {
-			System.out.println(headers);
 			return headers.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toList());
 		}
 
